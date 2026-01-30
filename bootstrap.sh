@@ -36,8 +36,8 @@ keystone-manage bootstrap \
 oslopolicy-policy-generator --namespace keystone --output-file /etc/keystone/policy.yaml
 oslopolicy-policy-upgrade --namespace keystone --policy /etc/keystone/policy.yaml --output-file /etc/keystone/policy.yaml
 
-uwsgi --http 0.0.0.0:5000 --threads 2 --uid keystone --wsgi-file $(which keystone-wsgi-public) &
+uwsgi --uid keystone --ini /keystone-uwsgi-public.ini &
 P1=$!
-uwsgi --http 0.0.0.0:35357 --threads 2 --uid keystone --wsgi-file $(which keystone-wsgi-admin) &
+uwsgi --uid keystone --ini /keystone-uwsgi-admin.ini &
 P2=$!
 wait ${P1} ${P2}
