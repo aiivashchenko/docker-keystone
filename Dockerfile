@@ -1,7 +1,7 @@
 FROM ubuntu:26.04
 
 RUN apt-get -y update && \
-    apt-get install -y --no-install-recommends memcached mariadb-server python3-dev python3-pip python3-setuptools git-core gcc
+    apt-get install -y --no-install-recommends memcached mariadb-server python3-dev python3-pip python3-setuptools git-core gcc libssl-dev
 RUN git clone --branch 28.0.0 --single-branch --depth 1 https://github.com/openstack/keystone.git /usr/local/src/keystone && \
     pip3 install --break-system-packages --upgrade setuptools pymysql uwsgi && \
     cd /usr/local/src/keystone && pip3 install --break-system-packages .
